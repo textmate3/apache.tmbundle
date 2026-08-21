@@ -2,7 +2,7 @@
 
 require "#{ENV['TM_BUNDLE_SUPPORT']}/lib/keychain"
 require "#{ENV['TM_SUPPORT_PATH']}/lib/escape"
-require "#{ENV['TM_SUPPORT_PATH']}/lib/osx/plist"
+require "#{ENV['TM_SUPPORT_PATH']}/private/plist"
 require "#{ENV['TM_SUPPORT_PATH']}/lib/exit_codes"
 require "#{ENV['TM_SUPPORT_PATH']}/lib/web_preview"
 
@@ -77,7 +77,7 @@ class ApacheCTL
         params[ "toggleTitle"  ] = "Add to Keychain"
 
         return_plist = %x{#{TM_DIALOG} -cmp #{e_sh params.to_plist} #{e_sh(BUNDLE_SUPPORT+"/nibs/RequestSecureStringKeychain.nib")}}
-        return_hash = OSX::PropertyList::load(return_plist)
+        return_hash = Plist.load(return_plist)
 
     end
     
